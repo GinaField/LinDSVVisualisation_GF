@@ -1,6 +1,6 @@
 package KAGO_framework.view;
 
-import KAGO_framework.Config;
+import my_project.control.Config;
 
 import javax.swing.*;
 

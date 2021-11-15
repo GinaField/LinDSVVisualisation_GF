@@ -1,6 +1,6 @@
 package KAGO_framework.model;
 
-import KAGO_framework.Config;
+import my_project.control.Config;
 import KAGO_framework.view.DrawTool;
 import KAGO_framework.control.Drawable;
 

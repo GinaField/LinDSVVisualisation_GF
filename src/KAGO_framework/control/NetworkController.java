@@ -1,6 +1,6 @@
 package KAGO_framework.control;
 
-import KAGO_framework.Config;
+import my_project.control.Config;
 import KAGO_framework.model.abitur.netz.Client;
 import my_project.control.ProgramController;
 

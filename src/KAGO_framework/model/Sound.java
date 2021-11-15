@@ -3,7 +3,7 @@ package KAGO_framework.model;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import KAGO_framework.Config;
+import my_project.control.Config;
 
 import java.io.File;
 

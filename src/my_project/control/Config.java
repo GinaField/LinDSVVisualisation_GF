@@ -1,4 +1,4 @@
-package KAGO_framework;
+package my_project.control;
 
 /**
  * In dieser Klasse werden globale, statische Einstellungen verwaltet.
@@ -9,8 +9,15 @@ package KAGO_framework;
 public class Config {
 
     // Frameworkversion
+    public final static String WINDOW_TITLE = "LinDSVVisuakisation";
     public final static String VERSION = "KNB-AOS-GraphicalObject-Java-Framework - 4.2b - 15.12.2020";
     public final static String JAVA_SUPPORTED = "Java 11 + JavaFX";
+
+    public final static boolean SHOW_DEFAULT_WINDOW = true;
+    public final static int WINDOW_WIDTH = 600;
+    public final static int WINDOW_HEIGHT = 600+29;
+    public final static boolean useSound = true;
+
 
     // Schaltet die Infomeldungen des Frameworks an oder aus
     public final static boolean INFO_MESSAGES = true;

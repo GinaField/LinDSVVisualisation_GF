@@ -1,6 +1,6 @@
 package KAGO_framework.control;
 
-import KAGO_framework.Config;
+import my_project.control.Config;
 import KAGO_framework.view.DrawTool;
 //import KAGO_scenario_framework.control.ScenarioController;
 import my_project.control.ProgramController;
@@ -72,13 +72,13 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
         if ( Config.INFO_MESSAGES) System.out.println("     > Es wird wiederholend die Methode updateProgram von dem ProgramController-Objekt aufgerufen.");
         if ( Config.INFO_MESSAGES) System.out.println("-------------------------------------------------------------------------------------------------\n");
         if ( Config.INFO_MESSAGES) System.out.println("** Ab hier folgt das Log zum laufenden Programm: **");
-        if(my_project.Config.useSound){
+        if(Config.useSound){
             soundController = new SoundController();
         } else {
             if ( Config.INFO_MESSAGES) System.out.println("** Achtung! Sound deaktiviert => soundController ist NULL (kann in Config geändert werden). **");
         }
 
-        if (!my_project.Config.SHOW_DEFAULT_WINDOW){
+        if (!my_project.control.Config.SHOW_DEFAULT_WINDOW){
             setDrawFrameVisible(false);
             if(Config.INFO_MESSAGES) System.out.println("** Achtung! Standardfenster deaktiviert => wird nicht angezeigt.). **");
         }
@@ -117,12 +117,12 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
         int x = width / 2;
         int y = height / 2;
         // Berechne die beste obere linke Ecke für das Fenster so, dass es genau mittig erscheint
-        x = x - my_project.Config.WINDOW_WIDTH / 2;
-        y = y - my_project.Config.WINDOW_HEIGHT / 2;
+        x = x - my_project.control.Config.WINDOW_WIDTH / 2;
+        y = y - my_project.control.Config.WINDOW_HEIGHT / 2;
         // Erzeuge die erste Szene
         createScene();
         // Erzeuge ein neues Fenster zum Zeichnen
-        drawFrame = new DrawFrame(my_project.Config.WINDOW_TITLE, x, y, my_project.Config.WINDOW_WIDTH, my_project.Config.WINDOW_HEIGHT, scenes.get(0).drawingPanel);
+        drawFrame = new DrawFrame(my_project.control.Config.WINDOW_TITLE, x, y, my_project.control.Config.WINDOW_WIDTH, my_project.control.Config.WINDOW_HEIGHT, scenes.get(0).drawingPanel);
         drawFrame.setResizable(false);
         showScene(0);
         // Übergibt den weiteren Programmfluss an das neue Objekt der Klasse ViewController
@@ -292,7 +292,7 @@ public class ViewController implements ActionListener, KeyListener, MouseListene
             Drawable currentObject = drawIterator.next();
             currentObject.draw(drawTool);
             currentObject.update(dtSeconds);
-            if (my_project.Config.useSound && soundController != null) soundController.update(dtSeconds);
+            if (my_project.control.Config.useSound && soundController != null) soundController.update(dtSeconds);
         }
     }
 

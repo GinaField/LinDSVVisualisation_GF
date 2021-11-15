@@ -1,4 +1,3 @@
-import KAGO_framework.Config;
 import KAGO_framework.control.MainController;
 
 public class MainProgram {

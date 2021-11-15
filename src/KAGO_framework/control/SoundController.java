@@ -1,6 +1,6 @@
 package KAGO_framework.control;
 
-import KAGO_framework.Config;
+import my_project.control.Config;
 import KAGO_framework.model.Sound;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import javafx.embed.swing.JFXPanel;

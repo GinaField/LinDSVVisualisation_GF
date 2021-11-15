@@ -2,7 +2,9 @@ package my_project.control;
 
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
+import KAGO_framework.model.abitur.datenstrukturen.Stack;
 import my_project.model.QueueBall;
+import my_project.model.StackBox;
 import my_project.view.InputReceiver;
 
 import java.awt.event.MouseEvent;
@@ -20,6 +22,8 @@ public class ProgramController {
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
     private Queue<QueueBall> ballQueue;
     private QueueBall lastBallinQueue;
+    private Stack<StackBox> boxStack;
+    private StackBox lastBoxInStack;
 
     /**
      * Konstruktor
@@ -42,6 +46,8 @@ public class ProgramController {
         // Für die Queue:
         ballQueue = new Queue<>();
         lastBallinQueue = null; // die letzte Kugel muss für die Animation gemerkt werden
+        boxStack = new Stack<>();
+        lastBoxInStack = null;
     }
 
     public void addBallToQueue(){
@@ -49,10 +55,24 @@ public class ProgramController {
         ballQueue.enqueue(newQueueBall);
         lastBallinQueue = newQueueBall;
     }
+    public void addBoxOnStack(){
+        StackBox newStackBox = new StackBox(400,400,lastBoxInStack,viewController);
+        boxStack.push(newStackBox);
+        lastBoxInStack = newStackBox;
+    }
 
     public void deleteBallFromQueue(){
         if(!ballQueue.isEmpty()){
-            if(ballQueue.front().tryToDelete()) ballQueue.dequeue();
+            if(ballQueue.front().tryToDelete()){
+                ballQueue.dequeue();
+            }
+        }
+    }
+    public void deleteBoxFromStack(){
+        if(!boxStack.isEmpty()){
+            if(boxStack.top().tryToDelete()){
+                boxStack.pop();
+            }
         }
     }
 
@@ -61,6 +81,9 @@ public class ProgramController {
      * @param e das Objekt enthält alle Informationen zum Klick
      */
     public void mouseClicked(MouseEvent e){
+
+    }
+    public void keyPressed(int key) {
 
     }
 

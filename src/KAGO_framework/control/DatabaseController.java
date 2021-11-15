@@ -1,10 +1,8 @@
 package KAGO_framework.control;
 
-import KAGO_framework.Config;
 import KAGO_framework.model.abitur.datenbanken.mysql.QueryResult;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 
 /**

@@ -3,6 +3,8 @@ package my_project.view;
 import KAGO_framework.control.Interactable;
 import KAGO_framework.control.ViewController;
 import my_project.control.ProgramController;
+
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 /**
@@ -27,6 +29,12 @@ public class InputReceiver implements Interactable {
 
     @Override
     public void keyPressed(int key) {
+        if(viewController.isKeyDown(KeyEvent.VK_A)){
+            programController.addBoxOnStack();
+        }
+        if(viewController.isKeyDown(KeyEvent.VK_D)){
+            programController.deleteBoxFromStack();
+        }
 
     }
 
