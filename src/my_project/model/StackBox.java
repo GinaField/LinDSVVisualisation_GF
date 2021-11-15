@@ -8,13 +8,19 @@ import KAGO_framework.view.DrawTool;
 public class StackBox extends GraphicalObject{
 
     private ViewController viewController;
-    private StackBox previousStackBox; // Vorgänger des QueueBalls
-    private boolean arrived; // hat der QueueBall den Anfang der Schlange erreicht?
-    private boolean deleted; // wurde der QueueBall aus der Schlange gelöscht?
+    private StackBox previousStackBox;
+    private boolean arrived;
+    private boolean deleted;
+    private int r;
+    private int g;
+    private int b;
 
-    public StackBox (double x, double y, StackBox previousStackBox, ViewController viewController){
+    public StackBox (double x, double y, int r, int g, int b, StackBox previousStackBox, ViewController viewController){
         this.x = x;
         this.y = y;
+        this.r = r;
+        this.g = g;
+        this.b = b;
         this.previousStackBox = previousStackBox;
         this.viewController = viewController;
         arrived = false;
@@ -24,13 +30,14 @@ public class StackBox extends GraphicalObject{
 
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.drawRectangle(x,y,50,50);
+        drawTool.setCurrentColor(r,g,b,255);
+        drawTool.drawFilledRectangle(x,y,50,50);
     }
 
     @Override
     public void update(double dt){
         if(!arrived){
-            if(previousStackBox== null || y < previousStackBox.getY()-30){
+            if(previousStackBox== null || y < previousStackBox.getY()){
                 y += 100*dt;
             }
             if (y <= 500){
@@ -43,7 +50,7 @@ public class StackBox extends GraphicalObject{
         }
     }
 
-    public boolean tryToDelete(){ //wenn box auf ihrer position ist wird deleted auf true gesetzt und zurückgegeben
+    public boolean tryToDelete(){
         if(arrived){
             deleted = true;
             return deleted;

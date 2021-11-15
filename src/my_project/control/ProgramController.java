@@ -56,7 +56,7 @@ public class ProgramController {
         lastBallinQueue = newQueueBall;
     }
     public void addBoxOnStack(){
-        StackBox newStackBox = new StackBox(400,400,lastBoxInStack,viewController);
+        StackBox newStackBox = new StackBox(400,400,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)),lastBoxInStack,viewController);
         boxStack.push(newStackBox);
         lastBoxInStack = newStackBox;
     }
