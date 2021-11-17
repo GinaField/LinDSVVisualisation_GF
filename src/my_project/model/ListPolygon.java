@@ -1,27 +1,24 @@
 package my_project.model;
-
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 
-
-public class StackBox extends GraphicalObject{
-
+public class ListPolygon extends GraphicalObject {
     private ViewController viewController;
-    private StackBox previousStackBox;
+    private ListPolygon previousListPolygon;
     private boolean arrived;
     private boolean deleted;
     private int r;
     private int g;
     private int b;
 
-    public StackBox (double x, double y, int r, int g, int b, StackBox previousStackBox, ViewController viewController){
+    public ListPolygon (double x, double y, int r, int g, int b, ListPolygon previousListPolygon, ViewController viewController){
         this.x = x;
         this.y = y;
         this.r = r;
         this.g = g;
         this.b = b;
-        this.previousStackBox = previousStackBox;
+        this.previousListPolygon = previousListPolygon;
         this.viewController = viewController;
         arrived = false;
         deleted = false;
@@ -31,14 +28,14 @@ public class StackBox extends GraphicalObject{
     @Override
     public void draw(DrawTool drawTool) {
         drawTool.setCurrentColor(r,g,b,255);
-        drawTool.drawFilledRectangle(x,y,50,50);
+        drawTool.drawFilledPolygon(x,y,x+40,y+40,x+60,y+60);
 
     }
 
     @Override
     public void update(double dt){
         if(!arrived){
-            if(previousStackBox== null || y < previousStackBox.getY()){
+            if(previousListPolygon== null || y < previousListPolygon.getY()){
                 y += 100*dt;
             }
             if (y <= 500){
@@ -61,3 +58,4 @@ public class StackBox extends GraphicalObject{
 
 
 }
+

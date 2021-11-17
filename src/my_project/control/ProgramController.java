@@ -1,11 +1,14 @@
 package my_project.control;
 
 import KAGO_framework.control.ViewController;
+import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
+import my_project.model.ListPolygon;
 import my_project.model.QueueBall;
 import my_project.model.StackBox;
 import my_project.view.InputReceiver;
+import my_project.model.ListPointer;
 
 import java.awt.event.MouseEvent;
 
@@ -24,6 +27,12 @@ public class ProgramController {
     private QueueBall lastBallinQueue;
     private Stack<StackBox> boxStack;
     private StackBox lastBoxInStack;
+    private List<ListPolygon> polygonList;
+    private ListPolygon lastPolygonInList;
+    private ListPointer listPointer;
+    private ListPolygon current;
+    private ListPolygon last;
+
 
     /**
      * Konstruktor
@@ -48,8 +57,24 @@ public class ProgramController {
         lastBallinQueue = null; // die letzte Kugel muss für die Animation gemerkt werden
         boxStack = new Stack<>();
         lastBoxInStack = null;
-    }
+        listPointer = new ListPointer(600,400);
 
+
+    }
+    public void movePointerToRight(){
+
+    }
+    /*public List getPrevious(List.ListNode pNode) {
+        if (pNode != null && pNode != first && !this.polygonList.isEmpty()) {
+            List.ListNode temp = first;
+            while (temp != null && temp.getNextNode() != pNode) {
+                temp = temp.getNextNode();
+            }
+            return temp;
+        } else {
+            return null;
+        }
+    }*/
     public void addBallToQueue(){
         QueueBall newQueueBall = new QueueBall(650,50,lastBallinQueue,viewController);
         ballQueue.enqueue(newQueueBall);
@@ -60,7 +85,11 @@ public class ProgramController {
         boxStack.push(newStackBox);
         lastBoxInStack = newStackBox;
     }
-
+    public void addPolygonToList(){
+        ListPolygon newListPolygon = new ListPolygon(200,600,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList,viewController);
+        polygonList.insert(newListPolygon);
+        lastPolygonInList = newListPolygon;
+    }
     public void deleteBallFromQueue(){
         if(!ballQueue.isEmpty()){
             if(ballQueue.front().tryToDelete()){
@@ -73,6 +102,19 @@ public class ProgramController {
             if(boxStack.top().tryToDelete()){
                 boxStack.pop();
             }
+        }
+    }
+    public void insertInList(){
+        if(!polygonList.isEmpty()){
+         //   if(polygonList.insert();){
+
+           // }
+        }
+    }
+    public void deletePolygonFromList(){
+        if(!polygonList.isEmpty()){
+
+
         }
     }
 

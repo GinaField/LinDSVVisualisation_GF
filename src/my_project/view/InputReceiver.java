@@ -29,11 +29,20 @@ public class InputReceiver implements Interactable {
 
     @Override
     public void keyPressed(int key) {
-        if(viewController.isKeyDown(KeyEvent.VK_A)){
+        if(viewController.isKeyDown(KeyEvent.VK_W)){
             programController.addBoxOnStack();
         }
-        if(viewController.isKeyDown(KeyEvent.VK_D)){
+        if(viewController.isKeyDown(KeyEvent.VK_S)){
             programController.deleteBoxFromStack();
+        }
+        if(viewController.isKeyDown(KeyEvent.VK_A)){
+            programController.addPolygonToList();
+        }
+        if(viewController.isKeyDown(KeyEvent.VK_D)){
+            programController.deletePolygonFromList();
+        }
+        if(viewController.isKeyDown(KeyEvent.VK_RIGHT)){
+            programController.movePointerToRight();
         }
 
     }
