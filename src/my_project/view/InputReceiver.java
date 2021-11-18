@@ -35,14 +35,17 @@ public class InputReceiver implements Interactable {
         if(viewController.isKeyDown(KeyEvent.VK_S)){
             programController.deleteBoxFromStack();
         }
-        if(viewController.isKeyDown(KeyEvent.VK_A)){
-            programController.addPolygonToList();
+        if(viewController.isKeyDown(KeyEvent.VK_B)){
+            programController.appendPolygonToList();
         }
-        if(viewController.isKeyDown(KeyEvent.VK_D)){
-            programController.deletePolygonFromList();
+        if(viewController.isKeyDown(KeyEvent.VK_DOWN)){
+            //programController.deletePolygonFromList();
         }
         if(viewController.isKeyDown(KeyEvent.VK_RIGHT)){
             programController.movePointerToRight();
+        }
+        if(viewController.isKeyDown(KeyEvent.VK_UP)){
+            programController.pointerToFirst();
         }
 
     }

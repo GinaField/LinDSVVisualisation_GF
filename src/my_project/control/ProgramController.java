@@ -20,7 +20,6 @@ public class ProgramController {
 
     //Attribute
 
-
     // Referenzen
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
     private Queue<QueueBall> ballQueue;
@@ -29,10 +28,9 @@ public class ProgramController {
     private StackBox lastBoxInStack;
     private List<ListPolygon> polygonList;
     private ListPolygon lastPolygonInList;
-    private ListPointer listPointer;
+    private ListPolygon first;
     private ListPolygon current;
     private ListPolygon last;
-
 
     /**
      * Konstruktor
@@ -57,24 +55,47 @@ public class ProgramController {
         lastBallinQueue = null; // die letzte Kugel muss für die Animation gemerkt werden
         boxStack = new Stack<>();
         lastBoxInStack = null;
-        listPointer = new ListPointer(600,400);
-
-
-    }
-    public void movePointerToRight(){
+        polygonList = new List<>();
+        lastPolygonInList = null;
 
     }
-    /*public List getPrevious(List.ListNode pNode) {
+    private ListPolygon getPrevious(ListPolygon pNode) {
         if (pNode != null && pNode != first && !this.polygonList.isEmpty()) {
-            List.ListNode temp = first;
-            while (temp != null && temp.getNextNode() != pNode) {
-                temp = temp.getNextNode();
+            ListPolygon temp = first;
+            while (temp != null && temp.getNextListPolygon() != pNode) {
+                temp = temp.getNextListPolygon();
             }
             return temp;
         } else {
             return null;
         }
-    }*/
+    }
+
+    public void pointerToFirst(){
+        if (!polygonList.isEmpty()) {
+            current = first;
+        }
+    }
+    public ListPolygon getLast(ListPolygon pNode) {
+        if (pNode != null && pNode != last && !this.polygonList.isEmpty()) {
+            ListPolygon temp = last;
+            while (temp != null && temp.getNextListPolygon() != pNode) {
+                temp = temp.getNextListPolygon();
+            }
+            return temp;
+        } else {
+            return null;
+        }
+    }
+    public void movePointerToRight(){
+        if (this.hasAccess()) {
+            current = current.getNextListPolygon();
+
+        }
+    }
+    public boolean hasAccess() {
+        return current != null;
+    }
     public void addBallToQueue(){
         QueueBall newQueueBall = new QueueBall(650,50,lastBallinQueue,viewController);
         ballQueue.enqueue(newQueueBall);
@@ -85,9 +106,9 @@ public class ProgramController {
         boxStack.push(newStackBox);
         lastBoxInStack = newStackBox;
     }
-    public void addPolygonToList(){
-        ListPolygon newListPolygon = new ListPolygon(200,600,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList,viewController);
-        polygonList.insert(newListPolygon);
+    public void appendPolygonToList(){
+        ListPolygon newListPolygon = new ListPolygon(800,600,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList, false,viewController);
+        polygonList.append(newListPolygon);
         lastPolygonInList = newListPolygon;
     }
     public void deleteBallFromQueue(){
@@ -113,8 +134,9 @@ public class ProgramController {
     }
     public void deletePolygonFromList(){
         if(!polygonList.isEmpty()){
+            if(current.getNextListPolygon().tryDelete()){
 
-
+            }
         }
     }
 
