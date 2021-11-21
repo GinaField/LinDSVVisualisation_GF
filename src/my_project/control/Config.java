@@ -14,8 +14,8 @@ public class Config {
     public final static String JAVA_SUPPORTED = "Java 11 + JavaFX";
 
     public final static boolean SHOW_DEFAULT_WINDOW = true;
-    public final static int WINDOW_WIDTH = 800;
-    public final static int WINDOW_HEIGHT = 800+29;
+    public final static int WINDOW_WIDTH = 1000;
+    public final static int WINDOW_HEIGHT = 1000+29;
     public final static boolean useSound = true;
 
 

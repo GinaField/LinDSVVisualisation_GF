@@ -4,11 +4,11 @@ import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
+import my_project.model.ListPointer;
 import my_project.model.ListPolygon;
 import my_project.model.QueueBall;
 import my_project.model.StackBox;
 import my_project.view.InputReceiver;
-import my_project.model.ListPointer;
 
 import java.awt.event.MouseEvent;
 
@@ -57,26 +57,11 @@ public class ProgramController {
         lastBoxInStack = null;
         polygonList = new List<>();
         lastPolygonInList = null;
+        first = null;
 
     }
-    private ListPolygon getPrevious(ListPolygon pNode) {
-        if (pNode != null && pNode != first && !this.polygonList.isEmpty()) {
-            ListPolygon temp = first;
-            while (temp != null && temp.getNextListPolygon() != pNode) {
-                temp = temp.getNextListPolygon();
-            }
-            return temp;
-        } else {
-            return null;
-        }
-    }
-
-    public void pointerToFirst(){
-        if (!polygonList.isEmpty()) {
-            current = first;
-        }
-    }
-    public ListPolygon getLast(ListPolygon pNode) {
+/*
+      public ListPolygon getLast(ListPolygon pNode) {
         if (pNode != null && pNode != last && !this.polygonList.isEmpty()) {
             ListPolygon temp = last;
             while (temp != null && temp.getNextListPolygon() != pNode) {
@@ -86,8 +71,29 @@ public class ProgramController {
         } else {
             return null;
         }
+    }*/
+    public ListPolygon getPrevious(){
+        ListPolygon tempPrev = polygonList.getContent();
+        polygonList.toFirst();
+        while(polygonList.hasAccess()){
+            polygonList.next();
+            if(polygonList.getContent().equals(current.getNextListPolygon())){
+                return tempPrev;
+            }
+        }
+        System.out.println(tempPrev);
+        return null;
+    }
+    public void pointerToFirst(){
+        ListPointer newPointer = new ListPointer(lastPolygonInList.getX(),lastPolygonInList.getY(), true,viewController);
+
+        if (!polygonList.isEmpty()) {
+            current = first;
+
+        }
     }
     public void movePointerToRight(){
+        //ListPointer.next();
         if (this.hasAccess()) {
             current = current.getNextListPolygon();
 
@@ -106,10 +112,12 @@ public class ProgramController {
         boxStack.push(newStackBox);
         lastBoxInStack = newStackBox;
     }
+
     public void appendPolygonToList(){
-        ListPolygon newListPolygon = new ListPolygon(800,600,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList, false,viewController);
+        ListPolygon newListPolygon = new ListPolygon(800,600,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList, first, viewController);
         polygonList.append(newListPolygon);
         lastPolygonInList = newListPolygon;
+
     }
     public void deleteBallFromQueue(){
         if(!ballQueue.isEmpty()){
@@ -159,3 +167,7 @@ public class ProgramController {
 
     }
 }
+//ToDo schreibe eine funktionierende insert Methode
+//ToDo schreibe eine funktionierende delete Methode
+//ToDo schaffe es das der pointer auf das erste Objekt zeigt
+//ToDo schaffe es das der pointer sich nach rechts bewegt

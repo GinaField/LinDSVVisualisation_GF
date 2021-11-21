@@ -31,7 +31,7 @@ public class StackBox extends GraphicalObject{
     @Override
     public void draw(DrawTool drawTool) {
         drawTool.setCurrentColor(r,g,b,255);
-        drawTool.drawFilledRectangle(x,y,50,50);
+        drawTool.drawFilledRectangle(x,y,200,200);
 
     }
 
