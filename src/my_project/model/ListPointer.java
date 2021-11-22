@@ -18,7 +18,8 @@ public class ListPointer extends GraphicalObject {
     public void draw(DrawTool drawTool){
         if (pointer == true){
             drawTool.setCurrentColor(100,200,100,255);
-            drawTool.drawFilledPolygon(x+10,y+10,x+50,y+50,x-70,y+70);
+            drawTool.drawFilledRectangle(x+10,y+150, 30,30);
+            drawTool.drawFilledPolygon(x+25,y+110,x+10,y+150,x+40,y+150);
         }
     }
 

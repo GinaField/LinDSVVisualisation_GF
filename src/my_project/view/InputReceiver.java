@@ -42,7 +42,7 @@ public class InputReceiver implements Interactable {
             //programController.deletePolygonFromList();
         }
         if(viewController.isKeyDown(KeyEvent.VK_RIGHT)){
-            programController.movePointerToRight();
+            programController.movePointer();
         }
         if(viewController.isKeyDown(KeyEvent.VK_UP)){
             programController.pointerToFirst();

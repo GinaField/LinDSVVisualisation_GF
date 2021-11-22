@@ -60,47 +60,26 @@ public class ProgramController {
         first = null;
 
     }
-/*
-      public ListPolygon getLast(ListPolygon pNode) {
-        if (pNode != null && pNode != last && !this.polygonList.isEmpty()) {
-            ListPolygon temp = last;
-            while (temp != null && temp.getNextListPolygon() != pNode) {
-                temp = temp.getNextListPolygon();
-            }
-            return temp;
-        } else {
-            return null;
-        }
-    }*/
+    public void movePointer(){
+        ListPointer newPointer = new ListPointer(lastPolygonInList.getX(),lastPolygonInList.getY(), true,viewController);
+        polygonList.next();
+    }
     public ListPolygon getPrevious(){
-        ListPolygon tempPrev = polygonList.getContent();
+        ListPolygon temp = polygonList.getContent();
         polygonList.toFirst();
         while(polygonList.hasAccess()){
             polygonList.next();
             if(polygonList.getContent().equals(current.getNextListPolygon())){
-                return tempPrev;
+                return temp;
             }
         }
-        System.out.println(tempPrev);
         return null;
     }
     public void pointerToFirst(){
-        ListPointer newPointer = new ListPointer(lastPolygonInList.getX(),lastPolygonInList.getY(), true,viewController);
-
         if (!polygonList.isEmpty()) {
             current = first;
 
         }
-    }
-    public void movePointerToRight(){
-        //ListPointer.next();
-        if (this.hasAccess()) {
-            current = current.getNextListPolygon();
-
-        }
-    }
-    public boolean hasAccess() {
-        return current != null;
     }
     public void addBallToQueue(){
         QueueBall newQueueBall = new QueueBall(650,50,lastBallinQueue,viewController);
@@ -114,7 +93,7 @@ public class ProgramController {
     }
 
     public void appendPolygonToList(){
-        ListPolygon newListPolygon = new ListPolygon(800,600,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList, first, viewController);
+        ListPolygon newListPolygon = new ListPolygon(800,700,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList, first, viewController);
         polygonList.append(newListPolygon);
         lastPolygonInList = newListPolygon;
 
@@ -142,9 +121,9 @@ public class ProgramController {
     }
     public void deletePolygonFromList(){
         if(!polygonList.isEmpty()){
-            if(current.getNextListPolygon().tryDelete()){
-
-            }
+            current.tryDelete();
+            polygonList.remove();
+            current = getPrevious();
         }
     }
 
