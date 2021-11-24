@@ -6,7 +6,6 @@ import KAGO_framework.view.DrawTool;
 public class ListPolygon extends GraphicalObject {
     private ViewController viewController;
     private ListPolygon previousListPolygon;
-    private ListPolygon firstPolygonInList;
     private boolean arrived;
     private boolean deleted;
     private int r;
@@ -15,14 +14,13 @@ public class ListPolygon extends GraphicalObject {
     private ListPolygon nextListPolygon;
     //private boolean pointer;
 
-    public ListPolygon (double x, double y, int r, int g, int b, ListPolygon previousListPolygon, ListPolygon firstPolygonInList, ViewController viewController){
+    public ListPolygon (double x, double y, int r, int g, int b, ListPolygon previousListPolygon, ViewController viewController){
         this.x = x;
         this.y = y;
         this.r = r;
         this.g = g;
         this.b = b;
         this.previousListPolygon = previousListPolygon;
-        this.firstPolygonInList = firstPolygonInList;
         this.nextListPolygon = nextListPolygon;
         this.viewController = viewController;
         arrived = false;
@@ -36,10 +34,6 @@ public class ListPolygon extends GraphicalObject {
     public void draw(DrawTool drawTool){
         drawTool.setCurrentColor(r,g,b,255);
         drawTool.drawFilledPolygon(x,y,x+40,y+40,x-60,y+60);
-        /*if (pointer == true){
-            drawTool.setCurrentColor(100,200,100,255);
-            drawTool.drawFilledPolygon(x+10,y+10,x+50,y+50,x-70,y+70);
-        }*/
     }
 
     @Override

@@ -30,4 +30,9 @@ public class ListPointer extends GraphicalObject {
     public void setPointer(boolean pointer) {
         this.pointer = pointer;
     }
+    @Override
+    public void update(double dt){
+
+
+    }
 }

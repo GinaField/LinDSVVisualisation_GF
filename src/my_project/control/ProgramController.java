@@ -9,6 +9,8 @@ import my_project.model.ListPolygon;
 import my_project.model.QueueBall;
 import my_project.model.StackBox;
 import my_project.view.InputReceiver;
+import my_project.model.ArrayClass;
+import my_project.model.Circle;
 
 import java.awt.event.MouseEvent;
 
@@ -59,7 +61,18 @@ public class ProgramController {
         lastPolygonInList = null;
         first = null;
 
+        ArrayClass [][] circleArray = new ArrayClass[8][4]; //Array wird erzeugt
+        for(int x = 0; x < circleArray[0].length; x++){ // solange x = 0 und x kleiner als die länge von cir.. wird c
+            for(int y = 0; y < circleArray.length; y++){
+                ArrayClass cArray = new ArrayClass(400,400,10 , 10, 10, false, viewController);
+                if (x == 0 && y == 0) {
+                    cArray.setCurrent(true);
+                }
+            }
+        }
+
     }
+
     public void movePointer(){
         ListPointer newPointer = new ListPointer(lastPolygonInList.getX(),lastPolygonInList.getY(), true,viewController);
         polygonList.next();
@@ -93,7 +106,8 @@ public class ProgramController {
     }
 
     public void appendPolygonToList(){
-        ListPolygon newListPolygon = new ListPolygon(800,700,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList, first, viewController);
+        ListPolygon newListPolygon = new ListPolygon(800,700,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList, viewController);
+        lastPolygonInList = first;
         polygonList.append(newListPolygon);
         lastPolygonInList = newListPolygon;
 
@@ -114,9 +128,7 @@ public class ProgramController {
     }
     public void insertInList(){
         if(!polygonList.isEmpty()){
-         //   if(polygonList.insert();){
 
-           // }
         }
     }
     public void deletePolygonFromList(){
