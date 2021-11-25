@@ -11,7 +11,7 @@ import my_project.model.StackBox;
 import my_project.view.InputReceiver;
 import my_project.model.ArrayClass;
 import my_project.model.Circle;
-
+import my_project.model.ArrayMarker;
 import java.awt.event.MouseEvent;
 
 /**
@@ -33,6 +33,8 @@ public class ProgramController {
     private ListPolygon first;
     private ListPolygon current;
     private ListPolygon last;
+    private ArrayMarker arrayMarker;
+    private ArrayClass arrayCircle;
 
     /**
      * Konstruktor
@@ -73,6 +75,21 @@ public class ProgramController {
 
     }
 
+    /*public void deleteCircleObj(){
+        if(arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] != null){
+            arrayCircle[arrayMarker.getI()][arrayMarker.getJ()].delete();
+            arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] = null;
+
+        }
+        //for(int i = 0; i < circleArray[0].length; i++){
+
+        //}
+    }*/
+   /* public void insertCircleObject(){
+        if(arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] = null){
+            arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] = new ArrayClass(130 + (x  * 40)+15, 100 + (y * 40)+ s5);
+        }
+    }*/
     public void movePointer(){
         ListPointer newPointer = new ListPointer(lastPolygonInList.getX(),lastPolygonInList.getY(), true,viewController);
         polygonList.next();
@@ -94,6 +111,28 @@ public class ProgramController {
 
         }
     }
+    public void arrayCurrentRight(){
+        //if(arrayMarker.getI() < circleArray.length){
+            arrayMarker.setI(arrayMarker.getI()+1);
+        //}
+    }
+    public void arrayCurrentLeft(){
+        //if(arrayMarker.getI() > 0){
+        arrayMarker.setI(arrayMarker.getI()-1);
+        //}
+    }
+    public void arrayCurrentDown(){
+        //if(arrayMarker.getI() < circleArray.length-1){
+        arrayMarker.setI(arrayMarker.getI()+1);
+        //}
+    }
+    public void arrayCurrentUp(){
+        //if(arrayMarker.getJ() > 0){
+        arrayMarker.setI(arrayMarker.getI()-1);
+        //}
+    }
+
+
     public void addBallToQueue(){
         QueueBall newQueueBall = new QueueBall(650,50,lastBallinQueue,viewController);
         ballQueue.enqueue(newQueueBall);
