@@ -29,7 +29,7 @@ public class InputReceiver implements Interactable {
 
     @Override
     public void keyPressed(int key) {
-        switch (key){
+        /*switch (key){
             case KeyEvent.VK_Q -> programController.addBall("List");
             case KeyEvent.VK_S -> programController.deleteBall();
             case KeyEvent.VK_R -> programController.setColor("r");
@@ -38,7 +38,18 @@ public class InputReceiver implements Interactable {
             case KeyEvent.VK_A -> programController.changeListPointer("toFirst");
             case KeyEvent.VK_D -> programController.changeListPointer("next");
             case KeyEvent.VK_W -> programController.addBall("current");
+        }*/
+        switch (key){
+            case KeyEvent.VK_E -> programController.deleteArrayObj();
+            case KeyEvent.VK_Q -> programController.insertArrayObj();
+            case KeyEvent.VK_BACK_SPACE -> programController.deleteAllArrayObjects();
+            case KeyEvent.VK_W -> programController.arrayCurrentUp();
+            case KeyEvent.VK_S -> programController.arrayCurrentDown();
+            case KeyEvent.VK_A -> programController.arrayCurrentLeft();
+            case KeyEvent.VK_D -> programController.arrayCurrentRight();
+            case KeyEvent.VK_SPACE -> programController.fillArray();
         }
+
 
     }
 

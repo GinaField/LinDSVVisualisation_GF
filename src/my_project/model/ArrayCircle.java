@@ -4,39 +4,37 @@ import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 
-public class ArrayClass extends GraphicalObject {
+import java.awt.*;
+
+public class ArrayCircle extends GraphicalObject {
 
     private ViewController viewController;
     private int r;
     private int g;
     private int b;
-    private boolean current;
 
-
-    public ArrayClass(double x, double y,int r, int g, int b, boolean current, ViewController viewController){
-
+    public ArrayCircle(int x, int y, ViewController viewController, int r, int g, int b){
         this.x = x;
         this.y = y;
         this.r = r;
         this.g = g;
         this.b = b;
-        this.current = current;
-        current = false;
+        this.viewController = viewController;
         viewController.draw(this);
-
     }
 
+    @Override
     public void draw(DrawTool drawTool){
-
-        drawTool.drawRectangle(x,y,100,100);
-
+        drawTool.setCurrentColor(r,g,b,255);
+        drawTool.drawFilledCircle(x,y,5);
     }
 
-    public boolean isCurrent() {
-        return current;
+    public void setR(int r) {
+        this.r = r;
     }
 
-    public void setCurrent(boolean current) {
-        this.current = current;
+    public void delete(){
+        viewController.removeDrawable(this);
     }
+
 }

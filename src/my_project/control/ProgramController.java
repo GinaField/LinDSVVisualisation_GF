@@ -25,8 +25,11 @@ public class ProgramController {
     private StackBox lastBoxInStack;
     private List<ListBall> ballList;
     private ListBall lastBallInList;
+    private ArrayCircle[][] circleArray;
+    private ArrayCircle arrayCircleObj;
     private ArrayMarker arrayMarker;
-    private ArrayClass arrayCircle;
+    private ArrayField arrayField;
+
 
     /**
      * Konstruktor
@@ -55,8 +58,11 @@ public class ProgramController {
         ballList = new List<>();
         ballList.toFirst();
         lastBallInList = null;
+        circleArray = new ArrayCircle[4][8];
+        arrayField = new ArrayField(130,100,viewController);
+        arrayMarker = new ArrayMarker(viewController);
 
-        ArrayClass [][] circleArray = new ArrayClass[8][4]; //Array wird erzeugt
+        /*ArrayClass [][] circleArray = new ArrayClass[8][4]; //Array wird erzeugt
         for(int x = 0; x < circleArray[0].length; x++){ // solange x = 0 und x kleiner als die länge von cir.. wird c
             for(int y = 0; y < circleArray.length; y++){
                 ArrayClass cArray = new ArrayClass(400,400,10 , 10, 10, false, viewController);
@@ -64,8 +70,69 @@ public class ProgramController {
                     cArray.setCurrent(true);
                 }
             }
-        }
+        }*/
 
+    }
+    public void fillArray(){
+        if(circleArray[0][0] == null){
+            for (int x = 0; x < circleArray.length; x++){
+                for (int y = 0; y < circleArray[0].length; y++){
+                    circleArray[x][y] = new ArrayCircle(130 + (x * 40) + 15, 100 + (y * 40) + 15, viewController, 0,0,255);
+                }
+            }
+        }
+    }
+
+    public void deleteAllArrayObjects(){
+        for (int x = 0; x < circleArray.length; x++){
+            for (int y = 0; y < circleArray[0].length; y++){
+                viewController.removeDrawable(circleArray[x][y]);
+                circleArray[x][y] = null;
+            }
+        }
+    }
+
+    public void deleteArrayObj(){
+        if(circleArray[arrayMarker.getI()][arrayMarker.getJ()] != null){
+            circleArray[arrayMarker.getI()][arrayMarker.getJ()].delete();
+            circleArray[arrayMarker.getI()][arrayMarker.getJ()] = null;
+        }
+    }
+
+    public void insertArrayObj(){
+        if(circleArray[arrayMarker.getI()][arrayMarker.getJ()] == null){
+            circleArray[arrayMarker.getI()][arrayMarker.getJ()] = new ArrayCircle( ( (int) arrayMarker.getX()) + 15, ( (int) arrayMarker.getY()) + 15, viewController,0,0,255);
+        }
+    }
+
+    public void changeArrayObj(){
+        if(circleArray[arrayMarker.getI()][arrayMarker.getJ()] != null){
+            circleArray[arrayMarker.getI()][arrayMarker.getJ()].setR(255);
+        }
+    }
+
+    public void arrayCurrentRight(){
+        if(arrayMarker.getI() < circleArray.length-1){
+            arrayMarker.setI(arrayMarker.getI()+1);
+        }
+    }
+
+    public void arrayCurrentLeft(){
+        if(arrayMarker.getI() > 0){
+            arrayMarker.setI(arrayMarker.getI()-1);
+        }
+    }
+
+    public void arrayCurrentUp(){
+        if(arrayMarker.getJ() > 0){
+            arrayMarker.setJ(arrayMarker.getJ()-1);
+        }
+    }
+
+    public void arrayCurrentDown(){
+        if(arrayMarker.getJ() < circleArray[0].length-1){
+            arrayMarker.setJ(arrayMarker.getJ()+1);
+        }
     }
     public void addBall(String to){
         switch(to){
@@ -131,43 +198,6 @@ public class ProgramController {
     }
 
 
-    /*public void deleteCircleObj(){
-        if(arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] != null){
-            arrayCircle[arrayMarker.getI()][arrayMarker.getJ()].delete();
-            arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] = null;
-
-        }
-        //for(int i = 0; i < circleArray[0].length; i++){
-
-        //}
-    }*/
-   /* public void insertCircleObject(){
-        if(arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] = null){
-            arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] = new ArrayClass(130 + (x  * 40)+15, 100 + (y * 40)+ s5);
-        }
-    }*/
-
-
-    public void arrayCurrentRight(){
-        //if(arrayMarker.getI() < circleArray.length){
-            arrayMarker.setI(arrayMarker.getI()+1);
-        //}
-    }
-    public void arrayCurrentLeft(){
-        //if(arrayMarker.getI() > 0){
-        arrayMarker.setI(arrayMarker.getI()-1);
-        //}
-    }
-    public void arrayCurrentDown(){
-        //if(arrayMarker.getI() < circleArray.length-1){
-        arrayMarker.setI(arrayMarker.getI()+1);
-        //}
-    }
-    public void arrayCurrentUp(){
-        //if(arrayMarker.getJ() > 0){
-        arrayMarker.setI(arrayMarker.getI()-1);
-        //}
-    }
 
 
     public void addBallToQueue(){
