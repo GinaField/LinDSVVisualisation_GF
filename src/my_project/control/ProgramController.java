@@ -4,14 +4,9 @@ import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.List;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import KAGO_framework.model.abitur.datenstrukturen.Stack;
-import my_project.model.ListPointer;
-import my_project.model.ListPolygon;
-import my_project.model.QueueBall;
-import my_project.model.StackBox;
+import my_project.model.*;
 import my_project.view.InputReceiver;
-import my_project.model.ArrayClass;
-import my_project.model.Circle;
-import my_project.model.ArrayMarker;
+
 import java.awt.event.MouseEvent;
 
 /**
@@ -28,11 +23,8 @@ public class ProgramController {
     private QueueBall lastBallinQueue;
     private Stack<StackBox> boxStack;
     private StackBox lastBoxInStack;
-    private List<ListPolygon> polygonList;
-    private ListPolygon lastPolygonInList;
-    private ListPolygon first;
-    private ListPolygon current;
-    private ListPolygon last;
+    private List<ListBall> ballList;
+    private ListBall lastBallInList;
     private ArrayMarker arrayMarker;
     private ArrayClass arrayCircle;
 
@@ -59,9 +51,10 @@ public class ProgramController {
         lastBallinQueue = null; // die letzte Kugel muss für die Animation gemerkt werden
         boxStack = new Stack<>();
         lastBoxInStack = null;
-        polygonList = new List<>();
-        lastPolygonInList = null;
-        first = null;
+        new InputReceiver(this,viewController);
+        ballList = new List<>();
+        ballList.toFirst();
+        lastBallInList = null;
 
         ArrayClass [][] circleArray = new ArrayClass[8][4]; //Array wird erzeugt
         for(int x = 0; x < circleArray[0].length; x++){ // solange x = 0 und x kleiner als die länge von cir.. wird c
@@ -74,6 +67,69 @@ public class ProgramController {
         }
 
     }
+    public void addBall(String to){
+        switch(to){
+            case "List" -> {
+                if(ballList.isEmpty()){
+                    addListBall();
+                    ballList.toFirst();
+                    ballList.getContent().changePointer();
+                }else {
+                    ListBall previous = lastBallInList;
+                    addListBall();
+                    previous.setNext(lastBallInList);
+                }
+            }
+            case "current" -> {
+                if(ballList.hasAccess()) {
+                    ListBall newListBall = new ListBall(ballList.getContent().getX(), ballList.getContent().getPrevious(), viewController);
+                    newListBall.setY(1000);
+                    newListBall.setNext(ballList.getContent());
+                    ballList.getContent().setPrevious(newListBall);
+                    if (newListBall.getPrevious() != null) {
+                        newListBall.getPrevious().setNext(newListBall);
+                    }
+                    ballList.insert(newListBall);
+                }
+            }
+        }
+    }
+
+    private void addListBall() {
+        ListBall newListBall = new ListBall(850,lastBallInList,viewController);
+        ballList.append(newListBall);
+        lastBallInList = newListBall;
+    }
+
+    public void deleteBall(){
+        if(!ballList.isEmpty()&& ballList.hasAccess()){
+            if(ballList.getContent().tryToDelete()) ballList.remove();
+        }
+    }
+    public void changeListPointer(String to){
+        if(ballList.getContent()!=null)ballList.getContent().changePointer();
+        switch (to){
+            case "toFirst" -> ballList.toFirst();
+            case "next" -> {
+                if(ballList.hasAccess()) {
+                    ballList.next();
+                }else{
+                    ballList.toFirst();
+                }
+            }
+        }
+        if(ballList.getContent()!=null) ballList.getContent().changePointer();
+    }
+    public void setColor(String color){
+        if(!ballList.isEmpty()&&ballList.hasAccess()) {
+            switch (color) {
+                case "r" -> ballList.getContent().setR();
+                case "g" -> ballList.getContent().setG();
+                case "b" -> ballList.getContent().setB();
+            }
+        }
+    }
+
 
     /*public void deleteCircleObj(){
         if(arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] != null){
@@ -90,27 +146,8 @@ public class ProgramController {
             arrayCircle[arrayMarker.getI()][arrayMarker.getJ()] = new ArrayClass(130 + (x  * 40)+15, 100 + (y * 40)+ s5);
         }
     }*/
-    public void movePointer(){
-        ListPointer newPointer = new ListPointer(lastPolygonInList.getX(),lastPolygonInList.getY(), true,viewController);
-        polygonList.next();
-    }
-    public ListPolygon getPrevious(){
-        ListPolygon temp = polygonList.getContent();
-        polygonList.toFirst();
-        while(polygonList.hasAccess()){
-            polygonList.next();
-            if(polygonList.getContent().equals(current.getNextListPolygon())){
-                return temp;
-            }
-        }
-        return null;
-    }
-    public void pointerToFirst(){
-        if (!polygonList.isEmpty()) {
-            current = first;
 
-        }
-    }
+
     public void arrayCurrentRight(){
         //if(arrayMarker.getI() < circleArray.length){
             arrayMarker.setI(arrayMarker.getI()+1);
@@ -144,13 +181,6 @@ public class ProgramController {
         lastBoxInStack = newStackBox;
     }
 
-    public void appendPolygonToList(){
-        ListPolygon newListPolygon = new ListPolygon(800,700,((int)(Math.random()*255)),((int)(Math.random()*255)),((int)(Math.random()*255)), lastPolygonInList, viewController);
-        lastPolygonInList = first;
-        polygonList.append(newListPolygon);
-        lastPolygonInList = newListPolygon;
-
-    }
     public void deleteBallFromQueue(){
         if(!ballQueue.isEmpty()){
             if(ballQueue.front().tryToDelete()){
@@ -165,18 +195,7 @@ public class ProgramController {
             }
         }
     }
-    public void insertInList(){
-        if(!polygonList.isEmpty()){
 
-        }
-    }
-    public void deletePolygonFromList(){
-        if(!polygonList.isEmpty()){
-            current.tryDelete();
-            polygonList.remove();
-            current = getPrevious();
-        }
-    }
 
     /**
      * Aufruf bei Mausklick
